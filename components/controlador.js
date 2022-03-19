@@ -13,7 +13,7 @@ async function buscarInfraccion(dni) {
                 return persona;
             }
             else {
-                return 'No posee infracciones';
+                return `El numero ingresado no se encuentra registrado`;
             }
         })
         .catch(error => console.log(error))
