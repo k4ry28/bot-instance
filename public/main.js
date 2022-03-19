@@ -16,6 +16,8 @@ chatForm.addEventListener('submit', e => {
     // Respuesta segun mensaje:
     let respuesta = document.createElement('div');
     respuesta.className = 'chat-bubble bot';
+    let respuesta2 = document.createElement('div');
+    respuesta2.className = 'chat-bubble bot';
 
     if (/si/gi.test(mensaje)) {
         respuesta.innerHTML = 'Perfecto, si escribes tu numero de DNI podre buscarlo por ti';
@@ -39,8 +41,7 @@ chatForm.addEventListener('submit', e => {
         }, 200);
 
         let dni = mensaje.match(/[0-9]{7,8}/);
-        let respuesta2 = document.createElement('div');
-        respuesta2.className = 'chat-bubble bot';
+
         let respuesta3 = document.createElement('div');
         respuesta3.className = 'chat-bubble bot';
 
@@ -57,7 +58,7 @@ chatForm.addEventListener('submit', e => {
                     }, 800);
 
                     respuesta3.innerHTML = data.infracciones;
-                    
+
                     setTimeout(() => {
                         chat.append(respuesta3);
                         chat.scrollTop = chat.scrollHeight;
@@ -85,6 +86,11 @@ chatForm.addEventListener('submit', e => {
                     chat.append(respuesta);
                     chat.scrollTop = chat.scrollHeight;
                 }, 800);
+                respuesta2.innerHTML = `ID: ${data._id}`
+                setTimeout(() => {
+                    chat.append(respuesta2);
+                    chat.scrollTop = chat.scrollHeight;
+                }, 900);
             });
     }
 
