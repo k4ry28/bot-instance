@@ -24,7 +24,6 @@ async function buscarInfraccion(dni) {
 async function infoProyecto() {
     let info = await Info.find()
 
-    console.log(info[0]);
     return info[0];
 }
 

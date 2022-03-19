@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
+    background: rgb(232, 231, 233); 
+    overflow: hidden;   
+}
+
+.chat-icon {
+    position: absolute;
+    right: 30px;
+    bottom: 20px;
+    height: 55px;
+    width: 55px;
+    background: linear-gradient(to right, #9900f2, #453f96);
+    text-align: center;
+    line-height: 55px;
+    border-radius: 50px;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.chat-icon i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.4s ease;
+}
+
+.chat-icon i.fa-times {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#click {
+    display: none;
+}
+
+#click:checked ~ label i.fa-times {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+
+#click:checked ~ label i.fa-comments {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+
+.wrapper {
+    position: absolute;
+    right: 30px;
+    bottom: 0px;
+    max-width: 350px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+#click:checked ~ .wrapper {
+    opacity: 1;
+    bottom: 85px;
+    pointer-events: auto;
+}
+
+.wrapper .head-text {
+    line-height: 50px;
+    color: #fff;
+    border-radius: 15px 15px 0 0;
+    padding: 0 20px;
+    font-size: 20px;
+    background-image: linear-gradient(to right, #9900f2, #453f96);
+}
+
+.wrapper .chat-box {
+    padding: 20px;
+    width: 100%;
+}
+
+.wrapper .chat-box {
+    height: 400px;
+    width: 350px;
+    background: #fbfbfbc2;
+    overflow: scroll;
+}
+
+.wrapper .chat-box .chat-bubble {
+    padding: 10px 15px;
+    display: inline-block;
+    clear: both;
+    margin-bottom: 10px;
+}
+
+.wrapper .chat-box .chat-bubble.bot {
+    background: linear-gradient(to right, #9900f2, #453f96);
+    color: #fff;
+    border-radius: 0 15px 15px 15px;
+    align-self: flex-start;
+    display: table;
+}
+
+.wrapper .chat-box .chat-bubble.client {
+    background: #fff;
+    color: #515365;
+    border: 1px solid #453f96;
+    border-radius: 15PX 0 15px 15px;
+    align-self: flex-end;
+    float: right;
+    display: table;
+}
+
+.wrapper .chat-input {
+    width: 100%;
+    position: relative;    
+}
+
+.wrapper .chat-input input {
+    width: 100%;
+    padding: 15px 15px 15px 15px;
+    border-radius: 0 0 15px 15px;
+    border-style: solid;
+    border-color: #fff;
+    color: #515365;
+    font-size: 16px;
+}
+
+.wrapper .chat-input .input-action {
+    width: 30px;
+    white-space: nowrap;
+    position: absolute;
+    z-index: 1;
+    top: 15px;
+    right: 20px;
+    text-align: right;
+}
+
+.wrapper .chat-input .input-action button {
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.wrapper .chat-input .input-action i {       
+    color: #453f96;
+    font-size: 20px;    
+}
+
+.show {
+    display: '';
+}
+
+.hide {
+    display: none;
+}
+

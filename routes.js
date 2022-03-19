@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const controlador = require('./components/controlador');
 
+router.get('/', (req, res) => {
+    res.render('index');
+});
+
 router.post('/contextoInicial', async (req, res) => {
     // Devuelve info del bot (nombre, id alfanumerico, nombre y apellido del creador)
     let info = await controlador.infoProyecto();
@@ -14,21 +18,28 @@ router.post('/obtenerInfracciones/:userDNI', async (req, res) => {
     let busqueda = await controlador.buscarInfraccion(dni);
 
     if (typeof busqueda == 'object') {
-        let infracciones = busqueda.infracciones.length;
+        let cantidad = busqueda.infracciones.length;
 
-        if (infracciones > 0) {
+        if (cantidad > 1) {
             res.json({
                 nombre: busqueda.nombre,
                 dni: busqueda.dni,
-                infracciones: `Posee ${busqueda.infracciones.length} infracciones`
-            })
+                infracciones: `Posee ${cantidad} infracciones.`
+            });
+        }
+        else if (cantidad == 1) {
+            res.json({
+                nombre: busqueda.nombre,
+                dni: busqueda.dni,
+                infracciones: `Posee ${cantidad} infracción.`
+            });
         }
         else {
             res.json({
                 nombre: busqueda.nombre,
                 dni: busqueda.dni,
-                infracciones: `Genial, no posee infracciones`
-            })
+                infracciones: `No posee infracciones. Genial!!`
+            });
         }
 
     }
@@ -36,25 +47,5 @@ router.post('/obtenerInfracciones/:userDNI', async (req, res) => {
 
 });
 
-router.post('/enviarMensaje', async (req, res) => {
-    let mensaje = req.body;
-
-    if(mensaje.test(/hola|buen dia|buenos dias|buenas tardes/gi)) {
-        res.send('Hola! Quieres saber si tienes infracciones pendientes?')
-    }
-    else if(mensaje.test(/si/gi)) {
-        res.send('Perfecto, si escribes tu numero de DNI podre buscarlo por ti');
-    }
-    else if(mensaje.test(/no/gi)) {
-        res.send('Sera en otro momento, que tengas un lindo día!')
-    }
-    else if(mensaje.test(/[0-9]{7,8}/)) {
-        let dni = mensaje.match(/[0-9]{7,8}/);
-        
-        res.send('Dame un segundo...');
-    }
-    
-
-});
 
 module.exports = router;
